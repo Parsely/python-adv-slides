@@ -7,3 +7,7 @@ It does not waste time teaching the basics of programming -- instead, it dives r
 The second day is spent on advanced Python features and techniques that make the language such a joy to use.
 
 I have given this presentation at places like BarCamp, HackNY, and other smaller conferences and gatherings.
+
+Slides can be viewed in compiled form at:
+
+http://pixelmonkey.org/pub/python-training/
