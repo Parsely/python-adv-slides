@@ -10,6 +10,14 @@ The final day is spent on learning the Python standard library and all its wonde
 
 I have given this presentation at places like BarCamp, HackNY, and other smaller conferences and gatherings.
 
+## View the slides online
+
 Slides can be viewed in compiled form at:
 
 http://pixelmonkey.org/pub/python-training/
+
+## How this was built
+
+Using Python, of course. It's turtles all the way down.
+
+I wrote the slides using [reST](http://docutils.sourceforge.net/rst.html), and specifically Docutils [support for S5 export](http://docutils.sourceforge.net/docs/user/slide-shows.html). Scripts are included to compile the presentation from the index.rst file and also to allow development of new slides with live recompilation using pyinotify (Linux systems only). See `build.sh` and `monitor.sh` for more information.
