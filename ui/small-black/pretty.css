@@ -39,8 +39,7 @@ div#controls form {position: absolute; bottom: 0; right: 0; width: 100%;
 #controls #navLinks a {padding: 0; margin: 0 0.5em; 
   border: none; color: #888; cursor: pointer;}
 #controls #navList {height: 1em;}
-#controls #navList #jumplist {position: absolute; bottom: 0; right: 0;
-  background: black; color: #CCC;}
+#controls #navList #jumplist {position: absolute; bottom: 0; right: 0;}
 
 #currentSlide {text-align: center; font-size: 0.5em; color: #AAA;
   font-family: sans-serif; font-weight: bold;}

@@ -380,7 +380,7 @@ function externalLinks() {
 function createControls() {
 	var controlsDiv = document.getElementById("controls");
 	if (!controlsDiv) return;
-	var hider = ' onmouseover="showHide(\'s\');" onmouseout="showHide(\'h\');"';
+	var hider = ' onmouseover="showHide(\'s\');"';
 	var hideDiv, hideList = '';
 	if (controlVis == 'hidden') {
 		hideDiv = hider;
