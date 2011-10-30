@@ -16,6 +16,14 @@ Slides can be viewed in compiled form at:
 
 http://pixelmonkey.org/pub/python-training/
 
+Note that the slides can be controlled as follows:
+
+ * Advance forward / back with the forward and back keys, or left click / right click of the mouse
+ * Press `c` to get the "controls", which also allows you to skip slides and switch to outline mode
+ * Outline mode includes some notes not included in the slidedeck, and also allows you to easily copy/paste examples into your own interpreter
+
+I suggest you run through the slides in slide mode, and then review them in outline mode, doing examples from your own interpreter. That's how I tended to do things when I physically gave the presentation. Of course, you can also contact me on Twitter at [@amontalenti](http://twitter.com/amontalenti) if you want to see if I might be giving the talk nearby you sometime soon :-)
+
 ## How this was built
 
 Using Python, of course. It's turtles all the way down.
