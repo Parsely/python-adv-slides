@@ -4046,6 +4046,15 @@ It's turtles all the way down!
 .. image:: img/magicturtle.jpg
     :align: center
 
+Other great presentations about Python
+---------------------------------------
+
+* `Python & Stuff`_ by @japerk
+* `Generator Tricks for Systems Programmers`_ by @dabaez
+
+.. _Python & Stuff: http://www.slideshare.net/japerk/python-stuff-10047724
+.. _Generator Tricks for Systems Programmers: http://www.dabeaz.com/generators/
+
 End
 ----
 
