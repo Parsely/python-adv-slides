@@ -4055,6 +4055,13 @@ Other great presentations about Python
 .. _Python & Stuff: http://www.slideshare.net/japerk/python-stuff-10047724
 .. _Generator Tricks for Systems Programmers: http://www.dabeaz.com/generators/
 
+Other great Python resources
+-----------------------------
+
+* `Python, Good to Great`_ by @jessenoller
+
+.. _Python, Good to Great: http://jessenoller.com/good-to-great-python-reads/
+
 End
 ----
 
