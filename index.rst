@@ -42,7 +42,7 @@ Introduction to Python
 Read slides on your own
 -----------------------
 
-http://pixelmonkey.org/python-training
+http://pixelmonkey.org/pub/python-training
 
 Meta Information
 ----------------
@@ -205,7 +205,7 @@ Python meets expectations
 
 There are many programming languages that meet the minimum criteria
 for a strong platform for modern software development. Python, like
-many of those options, is: 
+many of those options, is:
 
 .. class:: incremental
 
@@ -221,11 +221,11 @@ Python is unique in that it also has:
 
 .. class:: incremental
 
-    * an enormous standard library 
+    * an enormous standard library
     * a vibrant third-party development ecosystem
     * a wide acceptance for web development
     * a slew of academic programming libraries (bioinformatics, NLP)
-    * several options for increasing performance 
+    * several options for increasing performance
 
 My Job
 -------
@@ -297,7 +297,7 @@ Or, at best:
 
 .. sourcecode:: java
 
-    List<Integer> nums = 
+    List<Integer> nums =
         Arrays.asList(new Integer[] {45, 23, 51, 32, 5});
 
 Concise syntax is Pythonic
@@ -318,7 +318,7 @@ Dissection (con't)
 
     >>> for idx, num in enumerate(nums):
 
-*Iterates* over each item in the ``nums`` list, yielding a ``tuple`` for each 
+*Iterates* over each item in the ``nums`` list, yielding a ``tuple`` for each
 iteration step that contains the *index of the list value* and the *list value* itself.
 
 .. sourcecode:: python
@@ -404,7 +404,7 @@ The basics
 
 In traditional compiled languages like C/C++, you think about *user programs* which run directly on the operating system.
 
-.. image:: img/01_prog.png 
+.. image:: img/01_prog.png
     :align: center
 
 Python shell
@@ -457,7 +457,7 @@ Label assignment
     Traceback (most recent call last):
         print plant
         NameError: name 'plant' is not defined
-    >>> 
+    >>>
 
 Must assign a value to a label before it can be used. No compile-time check
 that label has already been assigned, so mis-spelled label name raises a
@@ -469,7 +469,7 @@ Strong typing
 .. class:: incremental
 
     Though labels can be re-assigned among types at will, the actual *values* behind the labels do have types.
-    
+
     And Python does not go out of its way to coerce types that cross "semantic boundaries".
 
 Minimal automatic coercion
@@ -712,7 +712,7 @@ Strings
     I am one of those programmers.
 
     My applications deal with the web and with large-scale text processing.
-    
+
     A core understanding of strings and a language with capabilities to manipulate them is critical to get work done in this environment.
 
 
@@ -730,7 +730,7 @@ In Python, strings can be enclosed with single, double, or *triple* quotes.
     >>> """triple"""
     'triple'
     >>> """though single and double are mostly interchangeable,
-    triple quotes have a special property: they ignore line 
+    triple quotes have a special property: they ignore line
     breaks. Thus, they can be used as a kind of 'heredoc'."""
     "though single and double are mostly interchangeable,\n triple ..."
 
@@ -777,7 +777,7 @@ Strings also support some great operators:
 
 .. sourcecode:: python
 
-    >>> p = "PYTHON" 
+    >>> p = "PYTHON"
     >>> g = ("GREAT " * 3).strip()
     >>> "GREAT" in g
     True
@@ -860,7 +860,7 @@ Object equality and identity
 ----------------------------
 
 .. sourcecode:: python
-    
+
     >>> x, y = (0, 1)
     >>> y == True # aka, "y is truthy"
     True
@@ -879,7 +879,7 @@ Control structures
 ------------------
 
 .. sourcecode:: python
-    
+
     if login_method == "admin" or user.staff:
         print "allow login for admin"
     elif authenticate(username, password):
@@ -933,7 +933,7 @@ Lists
 
 .. sourcecode:: python
 
-    >>> x = [] 
+    >>> x = []
     >>> x.append(5)
     >>> x.extend([6, 7, 8])
     >>> x
@@ -1204,10 +1204,10 @@ Functions
 ---------
 
 .. sourcecode:: python
-    
+
     def divide(a, b):
-        """Divides operands a and b using integer division. 
-        Returns a quotient and remainder of division 
+        """Divides operands a and b using integer division.
+        Returns a quotient and remainder of division
         operation in a 2-tuple."""
         q = a // b
         r = a - q*b
@@ -1231,8 +1231,8 @@ Using functions
     Help on function divide in module mymath:
 
     divide(a, b)
-        Divides operands a and b using integer division. 
-        Returns a quotient and remainder of division 
+        Divides operands a and b using integer division.
+        Returns a quotient and remainder of division
         operation in a 2-tuple.
     ...
 
@@ -1259,13 +1259,13 @@ Calling functions
     >>> print "quotient is %s, remainder is %s" \
     ...     % return_value
     quotient is 2, remainder is 1
-    
+
 
 Keyword arguments
 -----------------
 
 .. sourcecode:: python
-    
+
     def connect(host, port=80, scheme="http", timeout=300):
         http = HTTPClient()
         http.connect("{scheme}://{domain}:{port}".format(
@@ -1440,7 +1440,7 @@ Implement a function, ``url_parse``, that splits this string into dictionary wit
 
 .. sourcecode:: python
 
-    { "scheme": "http", "host": "www.linkedin.com", 
+    { "scheme": "http", "host": "www.linkedin.com",
     "path": "/in/andrewmontalenti",
     "port": 80, "fragment": None, "query": None }
 
@@ -1460,12 +1460,12 @@ URL Parser
         else:
             host = rest[0:offset]
             path = rest[offset:]
-        if ":" in host:    
+        if ":" in host:
             host, port = host.split(":", 1)
         else:
             port = None
         return dict(
-            Scheme=scheme, Host=host, 
+            Scheme=scheme, Host=host,
             Port=port, Path=path)
 
 Module self-test
@@ -1490,7 +1490,7 @@ Simple URL formatter
 
     def format_url(d):
         fmt = "{scheme}://{host}:{port}{path}"
-        url = fmt.format(**d) #** ignore that operator for now 
+        url = fmt.format(**d) #** ignore that operator for now
         if ":80" in url:
             url = url.replace(":80", "")
         return url
@@ -1503,7 +1503,7 @@ Integration test
     url = "http://www.linked.com/in/andrewmontalenti"
     # end-to-end test
     assert format_url(url_parse(url)) == url
-    
+
 EXERCISES: Strings and Lists
 ---------------------------------
 
@@ -1526,7 +1526,7 @@ Python is a dynamic and opinionated language.
 On your first day, you learned the basics:
 
 .. class:: incremental
-    
+
     * Labels, bindings, declarations, and expressions
     * Conditional statements
     * Data structures like dictionaries, lists, and tuples
@@ -1611,7 +1611,7 @@ Module structure
     if __name__ == '__main__':
         status = main()
         sys.exit(status)
-    
+
 Module with cmdline parsing (1)
 -------------------------------
 
@@ -1682,7 +1682,7 @@ Imagine you have a data format that looks like this::
 The first column represents an individual's age and the second column
 their test score on a standardized test.
 
-You want to write a Python module that will process a full file of that 
+You want to write a Python module that will process a full file of that
 data, but the file will be perhaps tens of thousands of records long.
 
 ``tabulardata`` module
@@ -1701,7 +1701,7 @@ data, but the file will be perhaps tens of thousands of records long.
         return col_vals
 
     def avg(nums):
-        """Returns a single number value that is the average of all 
+        """Returns a single number value that is the average of all
         values in sequence nums."""
         return sum(nums) / len(nums)
 
@@ -1741,7 +1741,7 @@ Files
             continue
         data.append(int(line))
     print data
-        
+
 Writing to files
 ----------------
 
@@ -1752,7 +1752,7 @@ Writing to files
     for item in data:
         f.writeline(item)
         # alternative technique
-        print >> f, item 
+        print >> f, item
     f.close()
 
 String IO
@@ -1813,7 +1813,7 @@ The organization of your code source files can help or hurt you with
 code re-use.
 
 Most people start their Python programming out by putting everything in
-a script: 
+a script:
 
 .. sourcecode:: python
 
@@ -1859,7 +1859,7 @@ Problems with scripts
 
     First, it's named ``calc-squares.py``, which means it can't readily be
     imported.  (Import filenames have to be valid Python names, of
-    course!) 
+    course!)
 
     And, second, were it importable, it would execute ``squares(0, 10)``
     on import - hardly what you want!
@@ -1889,7 +1889,7 @@ To fix the first, just change the name:
 .. class:: incremental
 
     Good, but now if you do ``import calc_squares``, the ``squares(0, 10)`` code
-    will still get run! 
+    will still get run!
 
     There are a couple of ways to deal with this.  The first
     is to look at the module name: if it's ``calc_squares``, then the module is
@@ -1953,14 +1953,14 @@ Why split our files this way?
 
     Second, you can look at the directory listing in an instant and see that
     ``squares.py`` is probably a library, while ``calc-squares`` must be a script,
-    because the latter cannot be imported.  
+    because the latter cannot be imported.
 
 Why split (con't)
 -----------------
 
 .. class:: incremental
 
-    Third, you can add automated tests to ``squares.py`` (as described below), and run them simply by running ``python squares.py``. 
+    Third, you can add automated tests to ``squares.py`` (as described below), and run them simply by running ``python squares.py``.
 
     Fourth, you can add script-specific code such as command-line argument handling to the script, and keep it separate from your data handling and algorithm code.
 
@@ -2141,7 +2141,7 @@ The context management protocol is an example of a "Dunder Protocol".
 
 http://wiki.python.org/moin/DunderAlias
 
-Rather than rely on type heirarchies like other languages, Python has a 
+Rather than rely on type heirarchies like other languages, Python has a
 variety of cross-cutting protocols that are implemented using methods
 with a double-underscore prefix and suffix. These are sometimes referred
 to as "dunder" methods.
@@ -2196,9 +2196,9 @@ PEP8 Discussion
     You may have noticed that a lot of Python code looks pretty similar.
 
     This is because there's an "official" style guide for Python
-    
+
     It's called `PEP 8 <http://www.python.org/dev/peps/pep-0008/>`__.
-    
+
     It's worth a quick skim, and an occasional deeper read for some sections.
 
 PEP8 Rules
@@ -2228,7 +2228,7 @@ Regular expressions
     Now that you know about lists, dictionaries, and files, you'll want to be
     able to do something useful with that knowledge.
 
-    A *regular expression* is a powerful domain-specific language for text 
+    A *regular expression* is a powerful domain-specific language for text
     pattern matching.
 
     Python, like most other modern languages, provides standard library support
@@ -2255,7 +2255,7 @@ Dissecting the e-mail RegExp
 
     ``[\S]`` means the *character class* containing any non-whitespace character.
     Could also be written:
-    
+
     ``[^ \t\n\r\f\v]``
 
     ``+`` symbol means that any char from that class must occur one or more times.
@@ -2473,7 +2473,7 @@ First-class functions
     ...     for method in methods:
     ...         method(data)
     >>> out_methods = (
-    ...         pprint, 
+    ...         pprint,
     ...         lambda data: sys.stdout.write(repr(data))
     ...     )
     >>> render(methods=out_methods)
@@ -2484,7 +2484,7 @@ Dissecting first-class functions
 .. sourcecode:: python
 
     out_methods = (
-       pprint, 
+       pprint,
        lambda data: sys.stdout.write(repr(data))
     )
 
@@ -2496,7 +2496,7 @@ Dissecting first-class functions
     a concise syntax.
 
     functions don't have to live anywhere in particular; here, we're inserting them
-    into a 2-tuple labeled ``out_methods``. 
+    into a 2-tuple labeled ``out_methods``.
 
 First-class functions go anywhere
 ---------------------------------
@@ -2553,8 +2553,8 @@ Optimizing the factory
 
     def precompile_factory_enhance(slow_factory):
         """Higher-order function that optimizes a slow
-        function factory that accepts regex patterns 
-        as its only arg and makes it a fast function 
+        function factory that accepts regex patterns
+        as its only arg and makes it a fast function
         that uses a compiled pattern."""
         def fast_factory(pattern):
             compiled = re.compile(pattern)
@@ -2686,8 +2686,8 @@ List comprehension
 
 .. sourcecode:: python
 
-    items = [process(item) 
-                for item in s 
+    items = [process(item)
+                for item in s
                 if item in process_list]
 
 These can be very powerful. The above processes and filters a list at once.
@@ -2716,7 +2716,7 @@ List comprehensions example (2)
     ('THE', 'the', 3),
     ('LAZY', 'lazy', 4),
     ('DOG', 'dog', 3)]
- 
+
 List comprehensions example (3)
 -------------------------------
 
@@ -2724,7 +2724,7 @@ List comprehensions example (3)
 
     >>> import os
     >>> from glob import glob
-    >>> [f for f in glob('*.py*') if os.stat(f).st_size > 6000] 
+    >>> [f for f in glob('*.py*') if os.stat(f).st_size > 6000]
 
 ``dict`` and ``set`` comprehensions?
 ------------------------------------
@@ -2924,7 +2924,7 @@ Our own ``xrange``
         while i < num_ints:
             yield i
             i += 1
-            
+
 Generator expressions
 ---------------------
 
@@ -3161,7 +3161,7 @@ Modeling a practical class
             if self.role_id is None:
                 return None
             return self.id2role.get(self.role_id, "UNKNOWN")
-                
+
 Using the ``Employee`` class
 ----------------------------
 
@@ -3220,7 +3220,7 @@ Methods
 
     Every function declared inside a class body is known as a *method*, which is automatically *bound* to an instance of the class at initialization time.
 
-    Inside a bound method, the first argument, typically named ``self``, contains the instance of the object in question. 
+    Inside a bound method, the first argument, typically named ``self``, contains the instance of the object in question.
 
 The pesky ``self`` convention
 ------------------------------
@@ -3273,7 +3273,7 @@ How does attribute lookup work?
     Magic can also happen due to a dunder method called ``__getattr__``.
 
     And further magic can happen due to something called *descriptors*.
-    
+
 __init__
 ---------
 
@@ -3290,7 +3290,7 @@ __new__
     earlier to control object *creation*.
 
     It is much rarer to use ``new``. One use-case is to cache class instances
-    (re-use classes if they have been constructed from equal arguments and 
+    (re-use classes if they have been constructed from equal arguments and
     are stateless).
 
     Another is to implement singletons, though typically this is a bad idea.
@@ -3332,7 +3332,7 @@ EXERCISES: More Classes and interfaces
 
 Your exercise is to define an interface for ``Tokenizer``, and then implement a couple of tokenizers against that interface, such as a whitespace tokenizer, one that recognizes punctuation, etc.
 
-Then, run each tokenizer on the same input using a snippet like this:: 
+Then, run each tokenizer on the same input using a snippet like this::
 
     for tokenizer in tokenizers:
         tokenizer.tokenize(string)
@@ -3377,12 +3377,12 @@ Data xform (1)
 
     with open("areadata.txt") as reader:
         lines = reader.readlines()
-        lines = [line.strip().split(",") for line in lines]    
+        lines = [line.strip().split(",") for line in lines]
         header, data = lines[0], lines[1:]
 
         def make_entry(row):
-            """From a sequence with cols of data, makes an 
-            object (type Entry) whose attrs are the header 
+            """From a sequence with cols of data, makes an
+            object (type Entry) whose attrs are the header
             labels and whose values are the column values."""
             entry = Entry()
             for i, val in enumerate(row):
@@ -3395,12 +3395,12 @@ Data xform (2)
 .. sourcecode:: python
 
     # ... still under with keyword
-        for line in lines:        
+        for line in lines:
             rows = []
             for row in data:
                 # convert values in columns
                 column_types = (str, float)
-                rows.append([column_types[i](val) 
+                rows.append([column_types[i](val)
                                 for i, val in enumerate(row)])
             # sort rows by first column
             rows = sorted(rows, key=itemgetter(0))
@@ -3422,7 +3422,7 @@ Data xform (3)
             # now that all gathered together, let's sum them
             for key, val in sums.iteritems():
                 sums[key] = sum(val)
-            # re-iterate over the original list of rows to generate the 
+            # re-iterate over the original list of rows to generate the
             # new derived columns, sum and percent
             for row in rows:
                 fmt = "%.2f"
@@ -3431,7 +3431,7 @@ Data xform (3)
                 row.append(sum_)
                 percent = fmt % ((entry.area / sum_) * 100)
                 row.append(percent)
-                row[1] = fmt % row[1] 
+                row[1] = fmt % row[1]
                 row[2] = fmt % row[2]
         # print the result in a pretty way
         pprint(rows)
@@ -3670,7 +3670,7 @@ Using ``repr`` and ``str``
     >>> person.gender = None
     >>> print person
     John Doe
-    
+
 __getattribute__
 -----------------
 
@@ -3686,7 +3686,7 @@ __getattr__
 ------------
 
 .. sourcecode:: python
-    
+
     >>> class A:
     ...    def __getattr__(self, name):
     ...        if name == 'special':
@@ -3753,8 +3753,8 @@ itertools.product
 
     >>> import itertools
     >>> list(itertools.product('ABC', '123'))
-    [('A', '1'), ('A', '2'), ('A', '3'), 
-    ('B', '1'), ('B', '2'), ('B', '3'), 
+    [('A', '1'), ('A', '2'), ('A', '3'),
+    ('B', '1'), ('B', '2'), ('B', '3'),
     ('C', '1'), ('C', '2'), ('C', '3')]
 
 itertools.combinations
