@@ -28,16 +28,18 @@ Introduction to Python
 
     **Exercises**
 
-    Exercises for this book are taken from four primary sources. These are:
+    Exercises for this book are taken from five primary sources. These are:
             * Zed Shaw's excellent book, `Learn Python the Hard Way`_, known affectionately as LPTHW
             * `Google's Python Class`_, available on Google Code
             * `Intermediate and Advanced Software Carpentry with Python`_, an online course by C. Titus Brown
             * `Dive Into Python`_, by Mark Pilgrim
+            * `Python Cookbook, 3rd Edition`_, by David Beazley and Brian K. Jones
 
 .. _Learn Python the Hard Way: http://learnpythonthehardway.org
 .. _Google's Python Class: http://code.google.com/edu/languages/google-python-class/
 .. _Intermediate and Advanced Software Carpentry with Python: http://ivory.idyll.org/articles/advanced-swc/
 .. _Dive Into Python: http://diveintopython.org/
+.. _Python Cookbook, 35rd Edition: http://shop.oreilly.com/product/0636920027072.do
 
 Read slides on your own
 -----------------------
@@ -374,25 +376,16 @@ For this course, I've suggested your company set up the following tools:
 .. class:: incremental
 
     * **Python 2.7**: the latest "stable/prod" version of Python
-    * **Console2**: a better console for Windows
-    * **Cream**: an easy-to-use extension of the ViM text editor
-    * **WingIDE 101**: a full-fledged Python IDE
     * **IPython**: an interactive Python shell
+    * **pip**: python's package manager
+    * **IPython Notebook**: a browser-based Python REPL and interactive environment
 
-Quick note on WingIDE
----------------------
-
-.. image:: img/02_ide.png
-    :class: scaled
-
-Python, IPython, BPython, DreamPie
-----------------------------------
+Python, IPython, IPython Notebook
+---------------------------------
 
 One of Python's best features is the REPL loop, or **Read**, **Evaluate**, **Print** **Loop**.
 
-Open source developers have created a number of "enhanced" REPLs over the years. The most common of these is **IPython**, but there is also **BPython** and **DreamPie**.
-
-WingIDE has its own REPL that is integrated with the IDE and works in debug mode, as well.
+Open source developers have created a number of "enhanced" REPLs over the years. The most common of these is **IPython Notebook**, but there is also regular old **IPython** as well as others.
 
 BREAK: Confirm system settings
 ------------------------------
@@ -479,7 +472,7 @@ Minimal automatic coercion
 
     >>> string = "two"
     >>> number = 3
-    >>> string, integer = integer, string # swap values
+    >>> string, number = number, string # swap values
     >>> print string + number
     Traceback (most recent call last)
         string + number
@@ -512,7 +505,7 @@ Why indentation?
 
     Better answer: because some of us don't.
 
-    `Python Style Guide (PEP 8)`_ recommends 4 spaces, and no tab characters.
+    `Python Style Guide (PEP 8)`_ specifies 4 spaces, and no tab characters.
 
 .. _Python Style Guide (PEP 8): http://www.python.org/dev/peps/pep-0008/
 
@@ -627,6 +620,9 @@ Comments
     # Written by John Doe, 6/5/2011
     #
     if __name__ == "__main__": # only runs when script is executed
+        """This comment can span multiple
+        lines
+        """
         print "Hello, World"
 
 Math and Numbers
@@ -674,31 +670,26 @@ When dealing with non-scientific computations, you probably want to use the ``De
 
 To make it a little easier to use, I imported it using a module alias ``D``.
 
-Fractions
----------
-
-.. sourcecode:: python
-
-    >>> from fractions import Fraction as F
-    >>> F(1, 3) + F(1, 2)
-    Fraction(5, 6)
-
 Formatting
 ----------
 
-There are two simple ways to do string formatting in Python, and both are very popular.
+There are a few ways to do string formatting in Python, though one is preferred.
+``str.format`` is a method on ``str`` that provides a full complement of
+string formatting features.
 
-    * ``%``, defined on ``str`` objects.
-    * ``str.format``, a more verbose method available on ``str``.
+.. sourcecode:: python
 
+    >>> "{num} cars crossed the intersection \
+        in the last {hrs} hours".format(num=5, hrs=24)
+    5 cars crossed the intersection in the last 24 hours
+
+``%``, defined on ``str`` objects, is sometimes used in older code for basic
+string formatting.
 
 .. sourcecode:: python
 
     >>> "%s cars crossed the intersection \
         in the last %s hours" % (5, 24)
-    5 cars crossed the intersection in the last 24 hours
-    >>> "{num} cars crossed the intersection \
-        in the last {hrs} hours".format(num=5, hrs=24)
     5 cars crossed the intersection in the last 24 hours
 
 
@@ -928,6 +919,7 @@ Using an elif chain
     else:
         return None
 
+
 Lists
 -----
 
@@ -971,15 +963,21 @@ Lists can be concatenated with other lists using ``extend``, which creates a new
 List slicing
 ------------
 
-Lists have a convenient syntax for accessing single elements or even ranges of elements. This is called *slicing* and can also be done with the ``slice`` builtin function or ``[i:j:stride]`` syntax.
+Lists (and other "sequences") have a convenient syntax for accessing single elements or even ranges of elements. This is called *slicing* and can also be done with the ``slice`` builtin function or ``[i:j:step]`` syntax.
 
 .. image:: img/10_listslice.png
     :align: center
 
+.. sourcecode:: python
+
+    record = '....................100 .......513.25 ..........'
+    cost = int(record[20:32]) * float(record[40:48])
+
+
 List aliasing
 -------------
 
-Lists can be aliased simply by binding a new label to the list. This sometimes leads to bugs!
+Lists and other so-called "mutable objects" can be aliased simply by binding a new label to the list. This sometimes leads to bugs!
 
 .. image:: img/11_listalias.png
     :align: center
@@ -1028,18 +1026,17 @@ Switch statement to dictionary
         "application/ms-word": "MS Word"
         "application/ms-excel": "MS Excel"
     }
-    return long2short.get(long, None)
+    print long2short.get(long, None)
 
 Sets
 ----
 
 .. sourcecode:: python
 
-    >>> ppl = ["Andrew", "Joe", "Bob", "Joe", "Bob", "Andrew"]
-    >>> ppl = set(ppl)
+    >>> ppl = {"Andrew", "Joe", "Bob", "Joe", "Bob", "Andrew"}
     >>> print ppl
     set(["Andrew", "Joe", "Bob"])
-    >>> trainers = set(["Andrew"])
+    >>> trainers = {"Andrew"}
     >>> print ppl - trainers
     set(["Joe", "Bob"])
 
@@ -1078,11 +1075,11 @@ Use ``in`` where possible (2)
 
        # do this:
        if key in d:
-           ...do something with d[key]
+           text = d[key]
 
        # not this:
        if d.has_key(key):
-           ...do something with d[key]
+           text = d[key]
 
 Think data, not code
 --------------------
@@ -1171,7 +1168,7 @@ A Python *sequence* is any type that supports these operations:
     * ``len``, for counting number of items in container
     * ``s[i]``, for getting the i'th element of sequence
     * ``s[i:j]``, for slicing from i to j in container
-    * ``s[i:j:stride]``, for slicing from i to j, using stride
+    * ``s[i:j:step]``, for slicing from i to j, skipping to every index that is a multiple of 'step'
 
 .. image:: img/24_slicing.png
     :align: center
@@ -1291,7 +1288,7 @@ Argument types
     * Instead, Pythonistas prefer what is known as *duck typing*
 
 Type checking anti-pattern
------------------------------------
+--------------------------
 
 .. sourcecode:: python
 
@@ -1326,8 +1323,10 @@ Take a deep breath
 
 This concept, *duck typing*, is near and dear to many a Pythonista's heart.
 
+"If it looks like a duck and quacks like a duck, then it must be a duck!"
+
 Eager checking anti-pattern
---------------------------------------
+---------------------------
 
 .. sourcecode:: python
 
@@ -1464,7 +1463,7 @@ URL Parser
             host, port = host.split(":", 1)
         else:
             port = None
-        return dict(
+        return (
             Scheme=scheme, Host=host,
             Port=port, Path=path)
 
@@ -1509,11 +1508,6 @@ EXERCISES: Strings and Lists
 
     * http://code.google.com/edu/languages/google-python-class/strings.html
     * http://code.google.com/edu/languages/google-python-class/lists.html
-
-HOMEWORK: Chapters 1-5
-----------------------
-
-Will give more detail and color on the topics we covered today.
 
 Day 2
 ------
