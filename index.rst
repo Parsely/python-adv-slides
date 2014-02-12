@@ -1616,16 +1616,12 @@ Module with cmdline parsing (1)
     """
 
     import sys
-    import optparse
+    import argparse
 
-    def process_command_line(argv):
-        if argv is None:
-            argv = sys.argv[1:]
-
+    def process_command_line():
         # initialize the parser object:
-        parser = optparse.OptionParser(
-            formatter=optparse.TitledHelpFormatter(width=78),
-            add_help_option=None)
+        parser = argparse.ArgumentParser(
+            description="Demonstrate argument parsing")
         # ... continued
 
 Module with cmdline parsing (2)
@@ -1634,33 +1630,28 @@ Module with cmdline parsing (2)
 .. sourcecode:: python
 
     # .. function above ..
-        parser.add_option(
-            '-h', '--help', action='help',
-            help='Show this help message and exit.')
+        parser.add_argument(
+            '-t', '--test', dest='IS_TEST', action='store_true',
+            help='Run in testing mode.')
 
-        settings, args = parser.parse_args(argv)
+        args = parser.parse_args()
 
         # check number of arguments, verify values, etc.:
-        if args:
-            parser.error('program takes no command-line arguments; '
-                        '"%s" ignored.' % (args,))
+        if args.IS_TEST:
+            setup_testing_mode()
 
-        # further process settings & args if necessary
+        # further process args if necessary
 
-        return settings, args
+        return args
 
 Module cmdline parsing (3)
 --------------------------
 
 .. sourcecode:: python
 
-    def main(argv=None):
-        settings, args = process_command_line(argv)
-        return 0
-
     if __name__ == '__main__':
-        status = main()
-        sys.exit(status)
+        args = process_command_line()
+        sys.exit(0)
 
 EXERCISES: Your First Python Module
 -----------------------------------
