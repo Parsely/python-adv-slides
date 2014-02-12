@@ -6,6 +6,8 @@ Introduction to Python
 
 :Author:  Andrew Montalenti
 :Date:    $Date: 2011-06-15 09:00:00 -0500 (Tues, 15 Jun 2011) $
+:Author:  Emmett Butler
+:Date:    $Date: 2014-02-12 09:00:00 -0500 (Wed, 12 Feb 2014) $
 
 .. This document is copyright Andrew Montalenti and Aleph Point, Inc.
 
@@ -60,6 +62,17 @@ Meta Information
 .. _Aleph Point: http://alephpoint.com
 .. _Parse.ly: http://parsely.com
 .. _amontalenti: http://twitter.com/amontalenti
+
+Meta Information
+----------------
+
+**Me**: I've been a full-time python programmer for a little over two years. I work at Parse.ly as an engineer.
+
+**E-mail me**: emmett.butler321@gmail.com
+
+**Follow me on Twitter**: emmett9001_
+
+.. _emmett9001: http://twitter.com/emmett9001
 
 Other skills are fair game, too
 --------------------------------
@@ -4004,6 +4017,13 @@ sqlalchemy ORM (2)
     user.password = "not a chance"
     session.add(user)
     session.commit()
+
+Other useful packages
+---------------------
+
+* pymongo
+* numpy
+* requests
 
 EXERCISES: Use the standard library
 ------------------------------------
