@@ -3136,8 +3136,8 @@ Modeling a practical class
     from datetime import datetime
 
     class Employee(object):
-        def __init__(self, id_, name, birth_year, role_id=None):
-            self.id = id_
+        def __init__(self, _id, name, birth_year, role_id=None):
+            self.id = _id
             self.name = name
             self.birth_year = birth_year
             self.role_id = role_id
@@ -3267,14 +3267,14 @@ How does attribute lookup work?
     And further magic can happen due to something called *descriptors*.
 
 __init__
----------
+--------
 
 At its core, a class is simply a class definition and *typically*, an initialization sequence implemented by ``__init__``.
 
 *Instances* of that class can act either as data containers or, more typically, *bundles of state and behavior*.
 
 __new__
---------
+-------
 
 .. class:: incremental
 
@@ -3417,11 +3417,11 @@ Data xform (3)
             # re-iterate over the original list of rows to generate the
             # new derived columns, sum and percent
             for row in rows:
-                fmt = "%.2f"
+                fmt = "0.2f"
                 entry = make_entry(row)
-                sum_ = sums[entry.feature]
-                row.append(sum_)
-                percent = fmt % ((entry.area / sum_) * 100)
+                _sum = sums[entry.feature]
+                row.append(_sum)
+                percent = format((entry.area / _sum) * 100, fmt)
                 row.append(percent)
                 row[1] = fmt % row[1]
                 row[2] = fmt % row[2]
@@ -3576,6 +3576,8 @@ Using the decorator version
         def age(self, age):
             self.birth_year = datetime.now().year - age
 
+This creates a read-only property called `age`.
+
 Descriptor objects
 ------------------
 
@@ -3635,7 +3637,7 @@ Customizing __repr__ and __str__
             self.name = name
             self.gender = gender
         def __repr__(self):
-            return "<%s name=%s, gender=%s>" % (
+            return "<{} name={}, gender={}>".format(
                 self.__class__.__name__,
                 self.name, self.gender)
         char2gender = dict(M="Male", F="Female")
@@ -3643,7 +3645,7 @@ Customizing __repr__ and __str__
             name = self.name
             gender = self.char2gender.get(self.gender, None)
             if gender is None: return name
-            return "%s (%s)" % name, gender
+            return "{} ({})".format(name, gender)
 
 Using ``repr`` and ``str``
 --------------------------
@@ -3695,7 +3697,7 @@ Nowadays, it's reserved only for "magic" objects, proxies, and frameworks.
 EXERCISES: Build a proxy class
 -------------------------------
 
-A proxy class is a class that can wrap any other object to add some functionality to it, but will forward all original requests onto that original object. For example:
+A proxy class is a class that can wrap any other object to add some functionality to it, but will forward all original member accesses to that original object. For example:
 
 .. sourcecode:: python
 
