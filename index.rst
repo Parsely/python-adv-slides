@@ -2968,7 +2968,7 @@ What's the difference between them?
 
     If you need to mutate the list (delete or append elements), you need to stick with *listcomps*.
 
-    Most expressions of form ``fn([listcomp])`` and be rewritten ``fn(genexp)`` safely.
+    Most expressions of form ``fn([listcomp])`` can be rewritten ``fn(genexp)`` safely.
 
 EXERCISES: Generators and Generator Expressions
 -----------------------------------------------
@@ -3024,33 +3024,18 @@ The standard library
 
     But if you need more, your can extend ``pprint.PrettyPrinter``.
 
-pdb
----
+ipdb
+----
 
 .. sourcecode:: python
 
-    import pdb; pdb.set_trace()
+    $ pip install ipdb
+    $ python
+    >>> import ipdb; ipdb.set_trace()
 
 Probably the handiest single line of Python, ever.
 
 Let's take a look at it interactively at the prompt.
-
-Rich debugger
--------------
-
-Tools like WingIDE provide a richer debugger.
-
-.. image:: img/15_debugger.png
-    :align: center
-    :class: scaled
-
-Call stack
-----------
-
-Debuggers allow you to navigate the callstack, which is useful for untangling complex, abstracted code.
-
-.. image:: img/16_callstack.png
-    :align: center
 
 os
 --
