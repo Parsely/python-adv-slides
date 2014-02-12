@@ -39,7 +39,7 @@ Introduction to Python
 .. _Google's Python Class: http://code.google.com/edu/languages/google-python-class/
 .. _Intermediate and Advanced Software Carpentry with Python: http://ivory.idyll.org/articles/advanced-swc/
 .. _Dive Into Python: http://diveintopython.org/
-.. _Python Cookbook, 35rd Edition: http://shop.oreilly.com/product/0636920027072.do
+.. _Python Cookbook, 3rd Edition: http://shop.oreilly.com/product/0636920027072.do
 
 Read slides on your own
 -----------------------
@@ -375,7 +375,7 @@ For this course, I've suggested your company set up the following tools:
 
 .. class:: incremental
 
-    * **Python 2.7**: the latest "stable/prod" version of Python
+    * **Python 3.3**: the latest ang greatest version of Python
     * **IPython**: an interactive Python shell
     * **pip**: python's package manager
     * **IPython Notebook**: a browser-based Python REPL and interactive environment
@@ -1700,8 +1700,7 @@ data, but the file will be perhaps tens of thousands of records long.
     rows = []
     for line in open("in.txt"):
         # step 2: clean the line and convert into columns
-        line = line.strip()
-        line = line.split(",")
+        line = line.strip().split(",")
         age = int(line[0])
         score = float(line[1])
         row = (age, score)
@@ -1745,10 +1744,12 @@ String IO
 
 .. sourcecode:: python
 
+    import cStringIO
+
     data = [1, 2, 3, 4, 5]
-    f = cStringIO()
+    f = cStringIO.StringIO()
     for item in data:
-        f.writeline(item)
+        f.write(str(item))
 
 
 Bufferred reading
@@ -1764,6 +1765,7 @@ Bufferred reading
     reader.close()
 
 This tends not to be necessary; only for larger files.
+There are also much better ways to deal with large files, which we'll get to later.
 
 Lazy programmer reading
 -----------------------
@@ -1891,6 +1893,7 @@ Module-and-script pattern
     def squares(start, stop):
       for i in range(start, stop):
          print i**2
+
     if __name__ == '__main__':
       squares(0, 10)
 
@@ -1913,6 +1916,7 @@ would actually write two files.
       for i in range(start, stop):
          print i**2
     def _test_squares():
+        """assert that squares() does what it should """
         pass
     if __name__ == `__main__`:
         import nose
@@ -1995,9 +1999,9 @@ What is __init__.py?
     about it except for the name, which tells Python that the directory is a
     package directory.
 
-    ``__init__.py`` is the only code executed on import, so if you want names and
-    symbols from other modules to be accessible at the package top level, you have
-    to import or create them in ``__init__.py``.
+    ``__init__.py`` is the only code executed on package import, so if you want
+    names and symbols from other modules to be accessible at the package top level,
+    you have to import or create them in ``__init__.py``.
 
 Why use packages?
 -----------------
@@ -2144,7 +2148,7 @@ Some other dunders:
     * ``__int__`` and ``__str__``: for type conversions
     * ``__call__``: to make an object *callable*, masquerade as a function
     * ``__iter__``: object is an iterator
-    * ``__repr__``: an object's string representation
+    * ``__getitem__``: object supports subscript indexing (myobj[key])
 
 Format dunders
 --------------
@@ -2152,7 +2156,7 @@ Format dunders
 .. class:: incremental
 
     * ``__format__``: used by ``str.format`` interpolation
-    * ``__repr``: used by ``repr`` built-in and Python shell
+    * ``__repr__``: used by ``repr`` built-in and Python shell
     * ``__str__``: used by ``print`` and many libraries (like Java ``toString``)
     * ``__pprint__``: used specifically by ``pprint`` (pretty print) library, covered later
 
@@ -2185,6 +2189,11 @@ PEP8 Discussion
     It's called `PEP 8 <http://www.python.org/dev/peps/pep-0008/>`__.
 
     It's worth a quick skim, and an occasional deeper read for some sections.
+
+    It's also worth installing a "style checker" into your text editor to automatically check your code's PEP8 compliance. See these vim_ and emacs_ plugins.
+
+.. _vim: https://github.com/nvie/vim-flake8
+.. _emacs: http://www.yilmazhuseyin.com/blog/dev/add-pep8-style-check-emacs/
 
 PEP8 Rules
 ----------
@@ -2254,14 +2263,14 @@ The match object
 
     >>> match = re.match(RE_EMAIL, 'test@nowhere.com')
     >>> for method in ("span", "start", "end", "groups"):
-    ...     print method, getattr(m, method)()
+    ...     print method, getattr(match, method)()
     ('span', (0, 20))
     ('start', 0)
     ('end', 20)
     ('groups', ())
 
-Matching with groups
---------------------
+Matching with capture groups
+----------------------------
 
 .. class:: incremental
 
@@ -2269,12 +2278,12 @@ Matching with groups
 
     **Validation**: if ``Match`` object is returned, it passes; if ``None`` is returned, it fails.
 
-    **Partial Matching**: If ``Match`` object is returned, we break the string into *groups*.
+    **Partial Matching**: If ``Match`` object is returned, we break the string into *capture groups*.
 
     Imagine if we needed to refer to the username/domain separately in an email address.
 
-Rewrite email RegExp with groups
---------------------------------
+Rewrite email RegExp with capture groups
+----------------------------------------
 
 .. sourcecode:: python
 
@@ -2299,12 +2308,14 @@ Enhanced email matching
     ''', re.VERBOSE)
     match = RE_EMAIL.match('test@google.com')
     print match.span()
-    print match.groups()
     print match.groupdict()
     email = match.groupdict()
     print "User entered email domain %s" % email["domain"]
     bad = re.match(RE_EMAIL, "test@")
     print bad
+
+Precompiling the regex with `compile` yields a slight performance benefit when the
+regex is used many times (eg in a tight loop)
 
 
 EXERCISES: Sorting and Data
@@ -2315,13 +2326,13 @@ EXERCISES: Sorting and Data
     * http://code.google.com/edu/languages/google-python-class/regular-expressions.html
 
 EXERCISES: Working with File Formats
--------------------------------------
+------------------------------------
 
     * http://code.google.com/edu/languages/google-python-class/exercises/baby-names.html
     * http://code.google.com/edu/languages/google-python-class/regular-expressions.html
 
 "Public" and "private" functions
----------------------------------
+--------------------------------
 
 .. class:: incremental
 
@@ -2404,9 +2415,9 @@ Aliasing functions
 
 .. sourcecode:: python
 
-    >>> from pprint import pprint, pformat
-    >>> pf = pformat
-    >>> pf is pformat
+    >>> from pprint import pprint, pformat as pf
+    >>> import pprint
+    >>> pf is pprint.pformat
     True
 
 First-class?
@@ -2624,8 +2635,8 @@ The iterator
 
 .. sourcecode:: python
 
-    it = iter(s)
-    while 1:
+    it = iter([1,2,3,4,5])
+    while True:
         try:
             item = it.next()
         except StopIteration:
@@ -2716,8 +2727,8 @@ List comprehensions example (3)
 
 .. sourcecode:: python
 
-    >>> fstats = dict([(f, os.stat(f)) for f in glob('*py*')])
-    >>> owners = set([os.stat(f).st_uid for f in glob('*py*')])
+    >>> fstats = {f: os.stat(f) for f in glob('*py*')}
+    >>> owners = {os.stat(f).st_uid for f in glob('*py*')}
     >>> fstats["ex1.py"]
     posix.stat_result(st_mode=33188, st_mtime=1307117107, ...)
     >>> 1000 in owners
@@ -2832,7 +2843,7 @@ yield keyword
 
     You can think of the ``yield`` keyword similarly to the ``return`` keyword, but with a twist.
 
-    The function containing the ``yield`` is replaced with one that simply returns a ``generator``.
+    The function containing the ``yield`` is one that simply returns a ``generator``.
 
     The generator only executes your function upon first call of the ``.next()`` method. The function runs until it reaches a ``yield``, and when it does, it yields the value and returns it from ``.next()``. But then, execution stops.
 
@@ -2841,7 +2852,18 @@ yield keyword
 Coroutines
 ----------
 
-Coroutines are a more exotic form of generator built by using the ``yield`` keyword as an expression rather than as a statement, e.g.
+.. class:: incremental
+
+    Coroutines are a related but separate topic from generators.
+
+    In the abstract, a coroutine is a function that, instead of running its entire body and returning, is allowed to *yield* and regain control to and from other coroutines an arbitrary number of times.
+
+    This is a form of parallelism that, after losing some popularity years ago, has started to make a comeback with python.
+
+Coroutines (cont.)
+------------------
+
+Python coroutines are built by using the ``yield`` keyword as an expression rather than as a statement. For example:
 
 .. sourcecode:: python
 
@@ -2865,7 +2887,7 @@ So, how do we use one of these things?
                 continue
             print(recv)
     printer = printer_sink()
-    printer.next() # initialize
+    printer.next() # "prime" the generator
     sink = comment_filter(printer())
     sink.next()
     sink.send("# commented line")
