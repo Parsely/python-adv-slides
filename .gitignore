@@ -1,4 +1,5 @@
 index.html
 .*.swp
 .*.un~
+*.pyc
 nohup.out
