@@ -170,6 +170,7 @@ function go(step) {
 	ce.style.visibility = 'hidden';
 	ne.style.visibility = 'visible';
 	jl.selectedIndex = snum;
+    location.hash = "(" + snum + ")";
 	currentSlide();
 	number = 0;
 }
@@ -250,7 +251,7 @@ function keys(key) {
 			case 13: // enter
 				if (window.event && isParentOrSelf(window.event.srcElement, 'controls')) return;
 				if (key.target && isParentOrSelf(key.target, 'controls')) return;
-				if(number != undef) {
+				if(number != undef && number != 0) {
 					goTo(number);
 					break;
 				}
@@ -278,7 +279,7 @@ function keys(key) {
 				}
 				break;
 			case 36: // home
-				goTo(0);
+				//goTo(0);
 				break;
 			case 35: // end
 				goTo(smax-1);
@@ -316,12 +317,20 @@ function clicker(e) {
 }
 
 function findSlide(hash) {
-	var target = document.getElementById(hash);
-	if (target) {
-		for (var i = 0; i < slideIDs.length; i++) {
-			if (target.id == slideIDs[i]) return i;
-		}
-	}
+    if (hash.indexOf("(") === 0) {
+        var jumpSlide = hash.replace("(", "").replace(")", "");
+        jumpSlide = parseInt(jumpSlide);
+        if (jumpSlide > 0) {
+            return jumpSlide;
+        }
+    } else {
+        var target = document.getElementById(hash);
+        if (target) {
+            for (var i = 0; i < slideIDs.length; i++) {
+                if (target.id == slideIDs[i]) return i;
+            }
+        }
+    }
 	return null;
 }
 
@@ -404,8 +413,8 @@ function createControls() {
 
 function fontScale() {  // causes layout problems in FireFox that get fixed if browser's Reload is used; same may be true of other Gecko-based browsers
 	if (!s5mode) return false;
-	var vScale = 22;  // both yield 32 (after rounding) at 1024x768
-	var hScale = 32;  // perhaps should auto-calculate based on theme's declared value?
+	var vScale = 23;  // both yield 32 (after rounding) at 1024x768
+	var hScale = 33;  // perhaps should auto-calculate based on theme's declared value?
 	if (window.innerHeight) {
 		var vSize = window.innerHeight;
 		var hSize = window.innerWidth;
@@ -550,10 +559,9 @@ function startup() {
 		}
 		document.onkeyup = keys;
 		document.onkeypress = trap;
-		document.onclick = clicker;
-        document.oncontextmenu = function() {
-            go(-1);
-            return false;
+		// document.onclick = clicker;
+        window.onhashchange = function() {
+            slideJump();
         };
 	}
 }

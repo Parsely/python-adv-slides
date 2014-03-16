@@ -388,7 +388,7 @@ For this course, I've suggested your company set up the following tools:
 
 .. class:: incremental
 
-    * **Python 3.3**: the latest ang greatest version of Python
+    * **Python 2.7**: the widely used Python version
     * **IPython**: an interactive Python shell
     * **pip**: python's package manager
     * **IPython Notebook**: a browser-based Python REPL and interactive environment
