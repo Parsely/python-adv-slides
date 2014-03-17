@@ -1,6 +1,4 @@
-import fixture
-url_parse = fixture.url_parse
-url_join = fixture.url_join
+from fixture import url_parse, url_join
 
 def test_basic_url():
     url = "http://www.linkedin.com/in/andrewmontalenti"

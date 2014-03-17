@@ -1,6 +1,10 @@
 test:
 	@echo "[nosetests] running..."
-	nosetests cw.py gw.py ks.py am.py
+	nosetests cw.py
+	nosetests gw.py
+	nosetests ks.py
+	nosetests am.py
+	nosetests eb.py
 	@echo "[nosetests] done."
 	@echo
 	@echo "[doctest] running..."
